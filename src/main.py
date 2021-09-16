@@ -10,7 +10,7 @@ from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
 from models import db, User
-from models import People, Planets, FavoritePeoples, FavoritePlanets
+from models import Peoples, Planets, FavoritePeoples, FavoritePlanets
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -60,7 +60,7 @@ def get_all_peoples():
 # [GET] /people/<int:people_id> Get a one single people information
 @app.route('/people/<int:people_id>', methods=["GET"])
 def get_people_By_id(people_id):
-    result = next((people for people in peoples_list if people["People_id"] == people_id), None)
+    result = next((people for people in peoples_list if people["Peoples_id"] == people_id), None)
     if result is not None:
         return jsonify(result), 200
     else:
@@ -145,11 +145,11 @@ def favorite_peoples_list():
     favourite_list = []
     
     user_id_request = body_request.get("user_id", None)
-    people_id_request = body_request.get("people_id", None)
+    people_id_request = body_request.get("peoples_id", None)
         
     favourite_list = FavoritePeoples(
       user_id = user_id_request,
-      people_id = people_id_request
+      peoples_id = peoples_id_request
     )
 
     db.session.add(favourite_list)
@@ -182,9 +182,9 @@ def delete_favorite_people():
     favourite_list = []
     
     user_id_request = body_request.get("user_id", None)
-    people_id_request = body_request.get("people_id", None)
+    people_id_request = body_request.get("peoples_id", None)
         
-    delete_favorite_people = FavoritePeoples.query.filter_by(user_id = user_id_request, people_id = people_id_request).first_or_404()
+    delete_favorite_people = FavoritePeoples.query.filter_by(user_id = user_id_request, peoples_id = people_id_request).first_or_404()
 
     try:
         db.session.delete(delete_favorite_people)

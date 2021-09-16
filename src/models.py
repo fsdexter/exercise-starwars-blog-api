@@ -32,7 +32,7 @@ class User(db.Model):
         }
 
 
-class People(db.Model):
+class Peoples(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name  = db.Column(db.String(250))
@@ -44,7 +44,7 @@ class People(db.Model):
     favorite_people_fk2 = db.relationship('FavoritePeoples', lazy=True)
 
     def __repr__(self):
-        return '<People %r>' % self.name
+        return '<Peoples %r>' % self.name
 
     def serialize(self):
         return {
@@ -91,7 +91,7 @@ class FavoritePeoples(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    character_id = db.Column(db.Integer, db.ForeignKey('people.id'))
+    character_id = db.Column(db.Integer, db.ForeignKey('peoples.id'))
     
     #character_id = db.relationship('Character', lazy=True)
     
