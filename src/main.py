@@ -9,8 +9,8 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User, People, Planet, FavoritePeoples, FavoritePlanets
-#from models import Person
+from models import db, User
+from models import People, Planets, FavoritePeoples, FavoritePlanets
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -198,4 +198,4 @@ def delete_favorite_people():
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
-    app.run(host='0.0.0.0', port=PORT, debug=False)
+    app.run(host='0.0.0.0', port=PORT, debug=true)
