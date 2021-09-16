@@ -106,8 +106,6 @@ class FavoriteCeople(db.Model):
             #"user_id": list(map(lambda x: x.serialize(), self.user_id))
         }
 
-FavoritePlanets
-
 class FavoritePlanets(db.Model):
 
     __tablename__ = 'favoritePlanets'
