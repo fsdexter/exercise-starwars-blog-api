@@ -18,4 +18,4 @@ def setup_admin(app):
     admin.add_view(ModelView(People, db.session))
     admin.add_view(ModelView(Planets, db.session))
     admin.add_view(ModelView(FavoritePeoples, db.session))
-    admin.add_view(ModelView(FavoritePlanets, db.session))on))
+    admin.add_view(ModelView(FavoritePlanets, db.session))
