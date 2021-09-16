@@ -85,7 +85,7 @@ class Planets(db.Model):
             "favorite_planets_fk2": list(map(lambda x: x.serialize(), self.favorite_planets_fk2))
         }
 
-class FavoriteCeople(db.Model):
+class FavoritePeoples(db.Model):
 
     __tablename__ = 'favoritePeople'
 
