@@ -51,7 +51,7 @@ def get_all_peoples():
   for people in response_list:
     peoples_list.append(people.serialize())
     
-    if len(peoples_list) !== 0:
+    if len(peoples_list) > 0:
         return jsonify(peoples_list), 200
     else:
         return "People not found", 404
@@ -74,7 +74,7 @@ def get_all_planets():
   for planet in response_list:
     planets_list.append(planet.serialize())
     
-    if len(planets_list) !== 0:
+    if len(planets_list) > 0:
         return jsonify(planets_list), 200
     else:
         return "Planet not found", 404
@@ -99,7 +99,7 @@ def get_all_users():
   for user in response_list:
     users_list.append(user.serialize())
     
-    if len(users_list) !== 0:
+    if len(users_list) > 0:
         return jsonify(users_list), 200
     else:
         return "User not found", 404
@@ -113,7 +113,7 @@ def get_user_favorites():
   for user_favorite in response_list:
     user_favorites_list.append(user_favorite.serialize())
     
-    if len(user_favorites_list) !== 0:
+    if len(user_favorites_list) > 0:
         return jsonify(user_favorites_list), 200
     else:
         return "User favorite not found", 404
