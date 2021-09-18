@@ -11,7 +11,7 @@ class User(db.Model):
     last_name = db.Column(db.String(250), nullable=False)
     email = db.Column(db.String(250), nullable=False, unique=True)
     password = db.Column(db.String(250), nullable=False)
-    favorite_people_fk = db.relationship('FavoritePeople', lazy=True)
+    favorite_people_fk = db.relationship('FavoritePeoples', lazy=True)
     favorite_planets_fk = db.relationship('FavoritePlanets', lazy=True)
 
     # tell python how to print the class object on the console
@@ -32,7 +32,7 @@ class User(db.Model):
         }
 
 
-class People(db.Model):
+class Peoples(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name  = db.Column(db.String(250))
@@ -41,10 +41,10 @@ class People(db.Model):
     birth = db.Column(db.String(250))
     sex = db.Column(db.String(250))
     country = db.Column(db.String(250))
-    favorite_people_fk2 = db.relationship('FavoritePeople', lazy=True)
+    favorite_people_fk2 = db.relationship('FavoritePeoples', lazy=True)
 
     def __repr__(self):
-        return '<People %r>' % self.name
+        return '<Peoples %r>' % self.name
 
     def serialize(self):
         return {
@@ -85,18 +85,18 @@ class Planets(db.Model):
             "favorite_planets_fk2": list(map(lambda x: x.serialize(), self.favorite_planets_fk2))
         }
 
-class FavoriteCeople(db.Model):
+class FavoritePeoples(db.Model):
 
-    __tablename__ = 'favoritePeople'
+    __tablename__ = 'favoritePeoples'
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    character_id = db.Column(db.Integer, db.ForeignKey('people.id'))
+    character_id = db.Column(db.Integer, db.ForeignKey('peoples.id'))
     
     #character_id = db.relationship('Character', lazy=True)
     
     def __repr__(self):
-        return '<FavoritePeople %r>' % self.id
+        return '<FavoritePeoples %r>' % self.id
 
     def serialize(self):
         return {
