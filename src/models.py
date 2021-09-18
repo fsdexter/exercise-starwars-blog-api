@@ -91,9 +91,9 @@ class FavoritePeoples(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    character_id = db.Column(db.Integer, db.ForeignKey('peoples.id'))
+    people_id = db.Column(db.Integer, db.ForeignKey('peoples.id'))
     
-    #character_id = db.relationship('Character', lazy=True)
+    
     
     def __repr__(self):
         return '<FavoritePeoples %r>' % self.id
@@ -102,7 +102,7 @@ class FavoritePeoples(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "character_id": self.character_id
+            "people_id": self.people_id
             #"user_id": list(map(lambda x: x.serialize(), self.user_id))
         }
 
@@ -122,4 +122,24 @@ class FavoritePlanets(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "planet_id": self.planet_id
+        }
+
+class UserFavorites(db.Model):
+
+    __tablename__ = 'userFavorites'
+
+    id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    planet_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
+    people_id = db.Column(db.Integer, db.ForeignKey('peoples.id'))
+
+    def __repr__(self):
+        return '<FavoritePlanets %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "planet_id": self.planets_id,
+            "people_id": self.peoples_id
         }

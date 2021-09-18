@@ -10,7 +10,7 @@ from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
 from models import db, User
-from models import Peoples, Planets, FavoritePeoples, FavoritePlanets
+from models import Peoples, Planets, FavoritePeoples, FavoritePlanets, UserFavorites
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -31,14 +31,14 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
-@app.route('/user', methods=['GET'])
-def handle_hello():
+# @app.route('/user', methods=['GET'])
+# def handle_hello():
 
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
+#     response_body = {
+#         "msg": "Hello, this is your GET /user response "
+#     }
 
-    return jsonify(response_body), 200
+#     return jsonify(response_body), 200
 
 
 
@@ -96,7 +96,7 @@ def get_planet_By_id(planet_id):
 @app.route('/user', methods=["GET"])
 def get_all_users():
     users_list = []
-    response_list = Users.query.all()
+    response_list = User.query.all()
     
     for user in response_list:
         users_list.append(user.serialize())
@@ -110,15 +110,17 @@ def get_all_users():
 @app.route('/user/favorites', methods=["GET"])
 def get_user_favorites():
     user_favorites_list = []
-    response_list = User_favorites.query.all()
+    # favorite_planets_list = FavoritePlanets.query.all()
+    # favorite_peoples_list = FavoritePeoples.query.all()
+    response_list = UserFavorites.query.all()
     
-    for user_favorite in response_list:
-        user_favorites_list.append(user_favorite.serialize())
+    for people in response_list:
+        user_favorites_list.append(userFavorites.serialize())
     
     if len(user_favorites_list) > 0:
         return jsonify(user_favorites_list), 200
     else:
-        return "User favorite not found", 404
+        return "User favorits not found", 404
 
 # [POST] /favorite/planet/<int:planet_id> Add a new favorite planet to the current user with the planet id = planet_id.
 @app.route('/favorite/planet/<int:planet_id> ', methods=["POST"])
